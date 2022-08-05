@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="ui segments">
+    <div class="ui segment">
+        <h3><i class="folder icon"></i>Here is your all packages!</h3>
+    </div>
+    <div class="ui segment">
+        <div class="ui cards">
+            {% for pack in object_list %}
+            <div class="card" style="background-color:#eaf4f4;">
+                
+                <div class="content">
+                  <a href="{% url 'links:list' username=user.username slug=pack.slug%}">
+                  <div class="header">
+                    <h2>
+                    <i class="folder open outline icon"></i>{{pack.name}}</h2></div></a>
+                  <div class="meta"><i class="paperclip icon"></i>{{pack.urls.count}} links</div>
+                  <div class="description">
+                    <p>{{pack.description}}</p>
+                  </div>
+                </div>
+                
+                <div class="extra content">
+                    <div class="ui buttons">
+                        <a href="{% url 'packs:package_update' pk=pack.pk %}">
+                            <button class="ui primary  button">Update</button>
+                        </a>                    
+                        <div class="or"></div>
+                        <a href="{% url 'packs:package_delete' pk=pack.pk %}">
+                            <button class="ui negative button" >Delete</button>
+                        </a>
+                      </div>
+                  </div>
+            </div>
+
+            {% endfor %}
+        
+        
+            </div>
+    
+        </div>
+    
+</div>
+
+{% endblock  %}
+    

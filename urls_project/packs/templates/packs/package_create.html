@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ui segments">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="ui segment">
+        <h4>Create A New pack</h4>
+    </div>
+    <div class="ui segment">
+        <form method="POST" action="{% url 'packs:package_create' username=user.username %}" class="ui form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Create Package" class="ui positive button">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

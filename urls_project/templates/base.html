@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base</title>
+    <!-- CSS only -->
+    <link rel="stylesheet"  type ="text/css" href="{% static '..//static/semantic-ui/semantic.css' %}">
+</head>
+<body style="background-color:#eaf4f4;" >
+    <div class="ui inverted segment">
+        <div class="ui inverted secondary menu">
+          <a class="item" href="{% url 'home' %}"><i class="linkify icon"></i>myURLs</a>
+          <a class="item" href="{% url 'about' %}"><i class="info icon"></i>About</a>
+          <div class="right menu">
+            {% if user.is_authenticated %}  
+              <a class="item" href="{% url 'packs:package_list' username=user.username%}">My Packages</a> 
+              <a class="item" href="{% url 'packs:package_create' username=user.username%}">Create Package</a>          
+              <a class="item" href="{% url 'links:create' %}">Create Link</a>     
+              <a class="item" href="{% url 'accounts:logout' %}">Logout</a>
+              <a class="item " href="">Welcome {{user.username}}</a>
+            {% else %} 
+               <a class="item" href="{% url 'accounts:signup' %}"><i class="signup alternate icon"></i>Signup</a> 
+               <a class="item" href="{% url 'accounts:login' %}"><i class="sign in alternate icon"></i>Login</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    
+    <div class="ui container">
+        <div class="ui grid">
+            <div class="twelve wide column">{% block content %}{% endblock  %}</div>
+            <div class="four wide column"><div class="ui vertical rectangle test ad" data-text="Vertical Rectangle"></div></div>
+          </div>
+        
+    </div>
+            
+          
+    
+    
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ui segments">
+    <div class="ui segment">
+        <h4>Create A New Link</h4>
+    </div>
+    <div class="ui segment">
+        <form method="POST" action="{% url 'links:create' username=user.username slug=package.slug %}" class="ui form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Create Link" class="ui positive button">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
